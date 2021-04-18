@@ -1,5 +1,7 @@
-import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
+
+import { DialogService } from './../../services/dialog.service';
+import { DataService } from './../../services/data.service';
 
 @Component({
   selector: 'app-homes',
@@ -9,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 export class HomesComponent implements OnInit {
   homes$;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.homes$ = this.dataService.getHomes$();
+  }
+
+  openDialog() {
+    this.dialogService.open();
   }
 }
