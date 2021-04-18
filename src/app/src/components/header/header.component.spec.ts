@@ -5,6 +5,8 @@ import { HeaderComponent } from './header.component';
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  const getElement = (selector) =>
+    fixture.nativeElement.querySelector(selector);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,17 +25,26 @@ describe('HeaderComponent', () => {
   });
 
   it('should show logo', () => {
-    const element = fixture.nativeElement.querySelector('[data-test="logo"]');
+    const element = getElement('[data-test="logo"]');
     expect(element).toBeTruthy();
   });
 
   it('should show search', () => {
-    const element = fixture.nativeElement.querySelector('[data-test="search"]');
+    const element = getElement('[data-test="search"]');
     expect(element).toBeTruthy();
   });
 
   it('should show menu', () => {
-    const element = fixture.nativeElement.querySelector('[data-test="menu"]');
+    const element = getElement('[data-test="menu"');
     expect(element).toBeTruthy();
+  });
+
+  it('should show filters', () => {
+    expect(getElement('[data-test="home-type"]')).toBeTruthy();
+    expect(getElement('[data-test="dates"]')).toBeTruthy();
+    expect(getElement('[data-test="guests"]')).toBeTruthy();
+    expect(getElement('[data-test="price"]')).toBeTruthy();
+    expect(getElement('[data-test="rooms"]')).toBeTruthy();
+    expect(getElement('[data-test="amenities"]')).toBeTruthy();
   });
 });
