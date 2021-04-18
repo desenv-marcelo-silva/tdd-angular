@@ -6,6 +6,8 @@ import { HeaderComponent } from './src/components/header/header.component';
 import { HomesComponent } from './src/components/homes/homes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 import { BookComponent } from './src/components/book/book.component';
 @NgModule({
   declarations: [AppComponent, HeaderComponent, HomesComponent, BookComponent],
@@ -13,6 +15,7 @@ import { BookComponent } from './src/components/book/book.component';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatDialogModule,
   ],
   entryComponents: [BookComponent],
