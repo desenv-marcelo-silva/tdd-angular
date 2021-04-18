@@ -8,9 +8,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [HeaderComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +20,20 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show logo', () => {
+    const element = fixture.nativeElement.querySelector('[data-test="logo"]');
+    expect(element).toBeTruthy();
+  });
+
+  it('should show search', () => {
+    const element = fixture.nativeElement.querySelector('[data-test="search"]');
+    expect(element).toBeTruthy();
+  });
+
+  it('should show menu', () => {
+    const element = fixture.nativeElement.querySelector('[data-test="menu"]');
+    expect(element).toBeTruthy();
   });
 });
