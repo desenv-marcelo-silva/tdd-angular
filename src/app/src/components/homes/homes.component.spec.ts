@@ -29,7 +29,7 @@ describe('HomesComponent', () => {
   });
 
   beforeEach(() => {
-    dataService = TestBed.inject(DataService);
+    dataService = TestBed.inject(DataService) as any;
 
     const homes = [
       {
@@ -50,7 +50,7 @@ describe('HomesComponent', () => {
     ];
     dataService.getHomes$.and.returnValue(of(homes));
 
-    dialogService = TestBed.inject(DialogService);
+    dialogService = TestBed.inject(DialogService) as any;
 
     fixture.detectChanges();
   });
@@ -77,6 +77,11 @@ describe('HomesComponent', () => {
   });
 
   it('should show book button', () => {
+    const home = fixture.nativeElement.querySelector('[data-test="home"]');
+    expect(home.querySelector('[data-test="book-btn"]')).toBeTruthy();
+  });
+
+  it('should use dialog service to open a dialog when clicking on book button', () => {
     const bookButton = fixture.nativeElement.querySelector(
       '[data-test="home"] button'
     );
@@ -84,6 +89,4 @@ describe('HomesComponent', () => {
     bookButton.click();
     expect(dialogService.open).toHaveBeenCalled();
   });
-
-  it('should use dialog service to open a dialog when clicking on book button', () => {});
 });
