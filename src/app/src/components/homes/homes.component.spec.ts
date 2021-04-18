@@ -29,7 +29,7 @@ describe('HomesComponent', () => {
   });
 
   beforeEach(() => {
-    dataService = TestBed.get(DataService);
+    dataService = TestBed.inject(DataService);
 
     const homes = [
       {
@@ -50,7 +50,7 @@ describe('HomesComponent', () => {
     ];
     dataService.getHomes$.and.returnValue(of(homes));
 
-    dialogService = TestBed.get(DialogService);
+    dialogService = TestBed.inject(DialogService);
 
     fixture.detectChanges();
   });

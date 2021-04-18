@@ -23,7 +23,7 @@ describe('DataService', () => {
 
   it('should return the list of homes', () => {
     // Spy on and mock the HttpClient
-    httpClient = TestBed.get(HttpClient);
+    httpClient = TestBed.inject(HttpClient);
     const homesMock = [
       {
         title: 'Home 1',
@@ -44,7 +44,7 @@ describe('DataService', () => {
     spyOn(httpClient, 'get').and.returnValue(of(homesMock));
 
     // Use our service to get homes.
-    dataService = TestBed.get(DataService);
+    dataService = TestBed.inject(DataService);
     const spy = jasmine.createSpy('spy');
 
     dataService.getHomes$().subscribe(spy);
