@@ -13,7 +13,5 @@ export class HomesComponent implements OnInit {
 
   ngOnInit(): void {
     this.homes$ = this.dataService.getHomes$();
-
-    // this.homes$ =
   }
 }
