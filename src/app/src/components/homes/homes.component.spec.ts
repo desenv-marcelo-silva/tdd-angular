@@ -6,6 +6,7 @@ import { spyOnClass } from 'jasmine-es6-spies';
 import { HomesComponent } from './homes.component';
 import { DataService } from './../../services/data.service';
 import { DialogService } from '../../services/dialog.service';
+import { homes } from '../../../../mocks/mockBooks';
 
 describe('HomesComponent', () => {
   let component: HomesComponent;
@@ -31,23 +32,6 @@ describe('HomesComponent', () => {
   beforeEach(() => {
     dataService = TestBed.inject(DataService) as any;
 
-    const homes = [
-      {
-        title: 'Home 1',
-        image: 'assets/listing.jpg',
-        location: 'New York',
-      },
-      {
-        title: 'Home 2',
-        image: 'assets/listing.jpg',
-        location: 'Boston',
-      },
-      {
-        title: 'Home 3',
-        image: 'assets/listing.jpg',
-        location: 'Chicago',
-      },
-    ];
     dataService.getHomes$.and.returnValue(of(homes));
 
     dialogService = TestBed.inject(DialogService) as any;
