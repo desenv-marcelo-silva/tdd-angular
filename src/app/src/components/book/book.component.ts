@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import * as dayjs from 'dayjs';
 
@@ -15,6 +15,7 @@ export class BookComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<BookComponent>,
     private dataService: DataService
   ) {}
 
@@ -32,6 +33,9 @@ export class BookComponent implements OnInit {
   }
 
   bookHome() {
-    this.dataService.bookHome$().subscribe();
+    this.dataService.bookHome$().subscribe((r) => {
+      console.log(r);
+      this.dialogRef.close();
+    });
   }
 }

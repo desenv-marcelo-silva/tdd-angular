@@ -1,6 +1,7 @@
+import { DialogService } from './../../services/dialog.service';
 import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { of } from 'rxjs';
 import { spyOnClass } from 'jasmine-es6-spies';
@@ -15,7 +16,7 @@ describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
   let dataService: jasmine.SpyObj<DataService>;
-
+  let dialogService: jasmine.SpyObj<MatDialogRef<BookComponent>>;
   let dialogData;
 
   const getTestElement = (selector) => getElement(fixture, selector);
@@ -30,6 +31,7 @@ describe('BookComponent', () => {
           useValue: {},
         },
         { provide: DataService, useFactory: () => spyOnClass(DataService) },
+        { provide: MatDialogRef, useFactory: () => spyOnClass(MatDialogRef) },
       ],
     }).compileComponents();
   }));
@@ -41,7 +43,7 @@ describe('BookComponent', () => {
 
     dialogData.home = homes[0];
     dataService = TestBed.inject(DataService) as any;
-
+    dialogService = TestBed.inject(MatDialogRef) as any;
     fixture.detectChanges();
   });
 
@@ -100,5 +102,23 @@ describe('BookComponent', () => {
     getTestElement('[data-test="book-btn"] button').click();
 
     expect(dataService.bookHome$).toHaveBeenCalled();
+  });
+
+  it('should close the dialog and shot notification after clicking Book button', () => {
+    dataService.bookHome$.and.returnValue(of(null));
+
+    const checkIn = getTestElement('[data-test="check-in"] input');
+    checkIn.value = '12/20/19';
+    checkIn.dispatchEvent(new Event('input'));
+
+    const checkOut = getTestElement('[data-test="check-out"] input');
+    checkOut.value = '12/23/19';
+    checkOut.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    getTestElement('[data-test="book-btn"] button').click();
+
+    expect(dialogService.close).toHaveBeenCalled();
   });
 });
