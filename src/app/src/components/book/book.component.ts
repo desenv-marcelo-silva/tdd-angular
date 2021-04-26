@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import * as dayjs from 'dayjs';
+
+import { DataService } from './../../services/data.service';
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -11,7 +13,10 @@ export class BookComponent implements OnInit {
   checkIn;
   checkOut;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -24,5 +29,9 @@ export class BookComponent implements OnInit {
       return numberOfDays * price;
     }
     return '0';
+  }
+
+  bookHome() {
+    this.dataService.bookHome$().subscribe();
   }
 }
