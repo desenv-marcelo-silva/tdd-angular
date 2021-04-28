@@ -1,7 +1,7 @@
-import { DialogService } from './../../services/dialog.service';
 import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { of } from 'rxjs';
 import { spyOnClass } from 'jasmine-es6-spies';
@@ -17,6 +17,8 @@ describe('BookComponent', () => {
   let fixture: ComponentFixture<BookComponent>;
   let dataService: jasmine.SpyObj<DataService>;
   let dialogService: jasmine.SpyObj<MatDialogRef<BookComponent>>;
+  let notificationService: jasmine.SpyObj<MatSnackBar>;
+
   let dialogData;
 
   const getTestElement = (selector) => getElement(fixture, selector);
@@ -32,6 +34,7 @@ describe('BookComponent', () => {
         },
         { provide: DataService, useFactory: () => spyOnClass(DataService) },
         { provide: MatDialogRef, useFactory: () => spyOnClass(MatDialogRef) },
+        { provide: MatSnackBar, useFactory: () => spyOnClass(MatSnackBar) },
       ],
     }).compileComponents();
   }));
@@ -44,6 +47,7 @@ describe('BookComponent', () => {
     dialogData.home = homes[0];
     dataService = TestBed.inject(DataService) as any;
     dialogService = TestBed.inject(MatDialogRef) as any;
+    notificationService = TestBed.inject(MatSnackBar) as any;
     fixture.detectChanges();
   });
 
@@ -106,7 +110,7 @@ describe('BookComponent', () => {
 
   it('should close the dialog and shot notification after clicking Book button', () => {
     dataService.bookHome$.and.returnValue(of(null));
-
+    // notificationService.open.and.returnValue(null);
     const checkIn = getTestElement('[data-test="check-in"] input');
     checkIn.value = '12/20/19';
     checkIn.dispatchEvent(new Event('input'));
@@ -120,5 +124,6 @@ describe('BookComponent', () => {
     getTestElement('[data-test="book-btn"] button').click();
 
     expect(dialogService.close).toHaveBeenCalled();
+    expect(notificationService.open).toHaveBeenCalled();
   });
 });
