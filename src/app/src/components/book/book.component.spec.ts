@@ -110,7 +110,6 @@ describe('BookComponent', () => {
 
   it('should close the dialog and shot notification after clicking Book button', () => {
     dataService.bookHome$.and.returnValue(of(null));
-    // notificationService.open.and.returnValue(null);
     const checkIn = getTestElement('[data-test="check-in"] input');
     checkIn.value = '12/20/19';
     checkIn.dispatchEvent(new Event('input'));
