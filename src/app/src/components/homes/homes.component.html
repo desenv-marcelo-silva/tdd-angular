@@ -3,8 +3,10 @@
     <div data-test="title">{{ home.title }}</div>
     <div data-test="location">{{ home.location }}</div>
     <div data-test="image"><img src="{{ home.image }}" width="200" /></div>
-    <div data-test="book-btn">
-      <button (click)="openDialog(home)">Book</button>
+    <div data-test="book-btn" class="uk-margin">
+      <button class="uk-button uk-button-primary" (click)="openDialog(home)">
+        Book
+      </button>
     </div>
   </div>
 </div>

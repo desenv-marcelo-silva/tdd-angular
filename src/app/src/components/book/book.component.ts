@@ -31,7 +31,7 @@ export class BookComponent implements OnInit {
       const numberOfDays = endDate.diff(startDate, 'd');
       return numberOfDays * price;
     }
-    return '0';
+    return '--';
   }
 
   bookHome() {

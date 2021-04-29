@@ -108,6 +108,20 @@ describe('BookComponent', () => {
     expect(dataService.bookHome$).toHaveBeenCalled();
   });
 
+  it('should show a double dash when no date input value', () => {
+    const checkIn = getTestElement('[data-test="check-in"] input');
+    checkIn.value = '';
+    checkIn.dispatchEvent(new Event('input'));
+
+    const checkOut = getTestElement('[data-test="check-out"] input');
+    checkOut.value = '';
+    checkOut.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    expect(getTestElement('[data-test="total"]').textContent).toContain('--');
+  });
+
   it('should close the dialog and shot notification after clicking Book button', () => {
     dataService.bookHome$.and.returnValue(of(null));
     const checkIn = getTestElement('[data-test="check-in"] input');
